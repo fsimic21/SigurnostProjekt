@@ -3,12 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="./SPM.js"></script>
     <title>SPM</title>
   </head>
   <body>
+    <h1>Secure password manager</h1>
     <button id="btnInsertPassword">Add +</button>
     <div class="divInsertPassword">
-      <form action="" method="post">
+      <form action="/" method="post">
         <label for="password">Insert the password you want to hash:</label>
         <input type="text" name="password" id="password" />
         <div class="divHashType">
@@ -22,6 +25,16 @@
         <button type="submit">Hash it</button>
       </form>
     </div>
-    <div class="passwordLists"></div>
+    <div class="passwordLists">
+      <table id="passwordTable">
+        <thead>
+          <tr>
+            <th>Hashed Password</th>
+            <th>Hash Type</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </body>
 </html>
