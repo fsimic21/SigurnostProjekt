@@ -1,8 +1,11 @@
 package com.SIS.SPM.service.Impl;
 
-import com.SIS.SPM.models.Password;
+import com.SIS.SPM.models.Algorithms;
+import com.SIS.SPM.models.RSA128;
+import com.SIS.SPM.models.SHA256;
 import com.SIS.SPM.service.PasswordService;
-import com.SIS.SPM.util.EncryptionUtils;
+import com.SIS.SPM.util.RSAEncryption;
+import com.SIS.SPM.util.SHAEncryption;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
@@ -10,67 +13,97 @@ import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.MessageDigest;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @Service
 public class PasswordServiceImpl implements PasswordService {
-    private static final String COLLECTION_NAME = "password";
-
     @Autowired
-    EncryptionUtils encryptionUtils;
+    SHAEncryption SHAEncryption;
+    @Autowired
+    RSAEncryption rsaEncryption;
 
     @Override
-    public List<Password> getAllPasswords() {
+    public List<SHA256> getAllSHA() {
         Firestore firestore = FirestoreClient.getFirestore();
-        List<Password> passwordList = new ArrayList<>();
+        List<SHA256> SHA256List = new ArrayList<>();
 
         try {
-            firestore.collection(COLLECTION_NAME)
+            firestore.collection(String.valueOf(Algorithms.SHA))
                     .get()
                     .get()
                     .getDocuments()
-                    .forEach(document -> passwordList.add(document.toObject(Password.class)));
+                    .forEach(document -> SHA256List.add(document.toObject(SHA256.class)));
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
-        return passwordList;
+        SHA256List.forEach(document -> document.setAlgorithm(Algorithms.SHA));
+        return SHA256List;
     }
 
     @Override
-    public void addPassword(Password password) {
+    public void addSHA(SHA256 sha256) {
         Firestore firestore = FirestoreClient.getFirestore();
         String encryptedPassword = null;
         try {
-            encryptedPassword = encrypt(password.getPassword(), password.getAlgorithm());
+            encryptedPassword = SHAEncryption.SHA256(sha256.getPassword());
         } catch (NoSuchAlgorithmException e) {
             return;
         }
-        password.setPassword(encryptedPassword);
+        sha256.setPassword(encryptedPassword);
 
-        ApiFuture<DocumentReference> future = firestore.collection(COLLECTION_NAME).add(password);
+        ApiFuture<DocumentReference> future = firestore.collection(Algorithms.SHA).add(sha256);
         try {
             DocumentReference documentReference = future.get();
-            System.out.println("Added document with ID: " + documentReference.getId());
+            System.out.println("Added SHA document with ID: " + documentReference.getId());
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
     }
 
-    private String encrypt(String password, String encryptAlgorithm) throws NoSuchAlgorithmException {
+    @Override
+    public List<RSA128> getAllRSA() {
+        Firestore firestore = FirestoreClient.getFirestore();
+        List<RSA128> rsa128 = new ArrayList<>();
 
-        switch (encryptAlgorithm){
-            case "SHA-256":
-                try {
-                    return encryptionUtils.SHA256(password);
-                } catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
-                }
+        try {
+            firestore.collection(String.valueOf(Algorithms.RSA))
+                    .get()
+                    .get()
+                    .getDocuments()
+                    .forEach(document -> rsa128.add(document.toObject(RSA128.class)));
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
         }
-        return password;
+        rsa128.forEach(document -> document.setAlgorithm(Algorithms.SHA));
+        return rsa128;
     }
+
+    @Override
+    public void addRSA(RSA128 rsa128) {
+        Firestore firestore = FirestoreClient.getFirestore();
+
+        try {
+            byte[] encryptedPassword = rsaEncryption.encrypt(rsa128.getPassword(), rsa128.getPublicKey());
+            String encryptedPasswordBase64 = Base64.getEncoder().encodeToString(encryptedPassword);
+            rsa128.setPassword(encryptedPasswordBase64);
+            ApiFuture<DocumentReference> future = firestore.collection(Algorithms.RSA).add(rsa128);
+            DocumentReference documentReference = future.get();
+            System.out.println("Added RSA document with ID: " + documentReference.getId());
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

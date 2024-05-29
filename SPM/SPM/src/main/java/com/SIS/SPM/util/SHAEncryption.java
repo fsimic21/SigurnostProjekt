@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 @Service
-public class EncryptionUtils {
+public class SHAEncryption {
 
     public String SHA256(String password) throws  NoSuchAlgorithmException {
         try {
@@ -14,7 +14,7 @@ public class EncryptionUtils {
             return bytesToHex(encodedHash);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return null; // Handle error gracefully in your application
+            return null;
         }
     }
 

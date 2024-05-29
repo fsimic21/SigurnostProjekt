@@ -1,13 +1,17 @@
 package com.SIS.SPM.service;
 
-import com.SIS.SPM.models.Password;
+import com.SIS.SPM.models.RSA128;
+import com.SIS.SPM.models.SHA256;
 
 import java.util.List;
 
 public interface PasswordService {
 
-    public List<Password> getAllPasswords();
+    List<SHA256> getAllSHA();
 
+    void addSHA(SHA256 sha256);
 
-    void addPassword(Password password);
+    List<RSA128> getAllRSA();
+
+    void addRSA(RSA128 rsa128) throws Exception;
 }
