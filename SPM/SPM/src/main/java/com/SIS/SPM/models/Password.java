@@ -11,7 +11,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Password {
-    private Long id;
     private String password;
     private String algorithm;
 }

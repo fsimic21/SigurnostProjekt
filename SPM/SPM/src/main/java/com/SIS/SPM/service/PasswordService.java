@@ -8,5 +8,6 @@ public interface PasswordService {
 
     public List<Password> getAllPasswords();
 
-    public void addPassword(Password password);
+
+    void addPassword(Password password);
 }
