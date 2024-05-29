@@ -11,15 +11,16 @@
     <h1>Secure password manager</h1>
     <button id="btnInsertPassword">Add +</button>
     <div class="divInsertPassword">
-      <form action="/" method="post">
+      <form action="/passwords" method="post">
         <label for="password">Insert the password you want to hash:</label>
         <input type="text" name="password" id="password" />
         <div class="divHashType">
           <label for="hashType">Choose a hash type:</label>
-          <select name="hashes" id="hashed">
+          <select name="algorithm" id="algorithm">
             <option value="aes">AES</option>
             <option value="blowfish">Blowfish</option>
             <option value="rsa">RSA</option>
+            <option value="SHA-256">RSA</option>
           </select>
         </div>
         <button type="submit">Hash it</button>
