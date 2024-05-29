@@ -34,4 +34,9 @@ public class PasswordServiceImpl implements PasswordService {
 
         return passwordList;
     }
+
+    @Override
+    public void addPassword(Password password) {
+        
+    }
 }
