@@ -1,5 +1,6 @@
 package com.SIS.SPM.controller;
 
+import com.SIS.SPM.models.AES128;
 import com.SIS.SPM.models.RSA128;
 import com.SIS.SPM.models.SHA256;
 import com.SIS.SPM.service.PasswordService;
@@ -33,5 +34,15 @@ public class PasswordController {
     @PostMapping("/rsa")
     public void addRSA(@RequestBody RSA128 rsa128) throws Exception {
         passwordService.addRSA(rsa128);
+    }
+
+    @GetMapping("/aes")
+    public List<AES128> getAllAES() {
+        return passwordService.getAllAES();
+    }
+
+    @PostMapping("/aes")
+    public void addAES(@RequestBody AES128 aes128){
+        passwordService.addAES(aes128);
     }
 }

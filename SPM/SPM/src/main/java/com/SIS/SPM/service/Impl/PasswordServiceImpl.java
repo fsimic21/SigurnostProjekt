@@ -1,9 +1,11 @@
 package com.SIS.SPM.service.Impl;
 
+import com.SIS.SPM.models.AES128;
 import com.SIS.SPM.models.Algorithms;
 import com.SIS.SPM.models.RSA128;
 import com.SIS.SPM.models.SHA256;
 import com.SIS.SPM.service.PasswordService;
+import com.SIS.SPM.util.AESEncryption;
 import com.SIS.SPM.util.RSAEncryption;
 import com.SIS.SPM.util.SHAEncryption;
 import com.google.api.core.ApiFuture;
@@ -30,6 +32,8 @@ public class PasswordServiceImpl implements PasswordService {
     SHAEncryption SHAEncryption;
     @Autowired
     RSAEncryption rsaEncryption;
+    @Autowired
+    AESEncryption aesEncryption;
 
     @Override
     public List<SHA256> getAllSHA() {
@@ -83,14 +87,14 @@ public class PasswordServiceImpl implements PasswordService {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        rsa128.forEach(document -> document.setAlgorithm(Algorithms.SHA));
+        rsa128.forEach(document -> document.setAlgorithm(Algorithms.RSA));
         return rsa128;
     }
 
     @Override
     public void addRSA(RSA128 rsa128) {
         Firestore firestore = FirestoreClient.getFirestore();
-
+        rsa128.setAlgorithm(rsa128.getAlgorithm().toUpperCase());
         try {
             byte[] encryptedPassword = rsaEncryption.encrypt(rsa128.getPassword(), rsa128.getPublicKey());
             String encryptedPasswordBase64 = Base64.getEncoder().encodeToString(encryptedPassword);
@@ -105,5 +109,39 @@ public class PasswordServiceImpl implements PasswordService {
         }
     }
 
+    @Override
+    public List<AES128> getAllAES() {
+        Firestore firestore = FirestoreClient.getFirestore();
+        List<AES128> aes128 = new ArrayList<>();
 
+        try {
+            firestore.collection(String.valueOf(Algorithms.AES))
+                    .get()
+                    .get()
+                    .getDocuments()
+                    .forEach(document -> aes128.add(document.toObject(AES128.class)));
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        aes128.forEach(document -> document.setAlgorithm(Algorithms.AES));
+        return aes128;
+    }
+
+    @Override
+    public void addAES(AES128 aes128) {
+        Firestore firestore = FirestoreClient.getFirestore();
+        aes128.setAlgorithm(aes128.getAlgorithm().toUpperCase());
+        try {
+            byte[] encryptedPassword = aesEncryption.encrypt(aes128.getPassword(), aes128.getSecretKey()).getBytes();
+            String encryptedPasswordBase64 = Base64.getEncoder().encodeToString(encryptedPassword);
+            aes128.setPassword(encryptedPasswordBase64);
+            ApiFuture<DocumentReference> future = firestore.collection(Algorithms.AES).add(aes128);
+            DocumentReference documentReference = future.get();
+            System.out.println("Added AES document with ID: " + documentReference.getId());
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

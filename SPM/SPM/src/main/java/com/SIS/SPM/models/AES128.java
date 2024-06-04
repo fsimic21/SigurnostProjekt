@@ -11,9 +11,4 @@ import lombok.Setter;
 @Setter
 public class AES128 extends Password {
     private String secretKey;
-
-    private boolean validKey(String sk){
-        if( sk.length() ==16) return true;
-        else return false;
-    }
 }
