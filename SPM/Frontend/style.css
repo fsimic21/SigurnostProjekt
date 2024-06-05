@@ -89,7 +89,7 @@ select {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
-  max-width: 300px;
+  max-width: 600px;
   word-wrap: break-word;
 }
 
@@ -97,7 +97,6 @@ select {
   background-color: #f2f2f2;
 }
 
-/* New Styles */
 .passwordInputGroup {
   display: flex;
   align-items: center;

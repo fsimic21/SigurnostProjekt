@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const data = {
-      password: password,
-      key: key
+      key: key,
+      password: password
     };
 
     fetch(url, {
@@ -58,14 +58,20 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       body: JSON.stringify(data)
     })
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        console.log("aaaaa")
+        return response.JSON
+      })
       .then(data => {
-        console.log(data + " ovo je odgovor servera");
         fetchPasswords();
       })
       .catch(error => {
         console.log("Greška " + error);
       });
+    
   });
 
   function generateRandomPassword() {
@@ -123,30 +129,36 @@ document.addEventListener("DOMContentLoaded", () => {
         throw new Error('Network response was not ok');
       }
       const passwords = await response.json();
-      populateTable(passwords);
+      if(passwords){
+        console.log("Dohvacam sifre", passwords);
+        populateTable(passwords);
+      }
+      
     } catch (error) {
       console.log("Error fetching passwords: " + error);
     }
   }
 
   function populateTable(passwords) {
+    console.log("Populating table with passwords", passwords);
     const tbody = document.querySelector("#passwordTable tbody");
     tbody.innerHTML = '';
-
+  
     passwords.forEach(password => {
       const row = document.createElement('tr');
-
+  
       const hashedPasswordCell = document.createElement('td');
       hashedPasswordCell.textContent = password.password;
       row.appendChild(hashedPasswordCell);
-
+  
       const hashTypeCell = document.createElement('td');
       hashTypeCell.textContent = password.hashType;
       row.appendChild(hashTypeCell);
-
+  
       tbody.appendChild(row);
     });
   }
+  
 
   fetchPasswords();
 });
