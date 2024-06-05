@@ -94,3 +94,22 @@ select {
   background-color: #f2f2f2;
   text-align: left;
 }
+
+/* New Styles */
+.passwordInputGroup {
+  display: flex;
+  align-items: center;
+}
+
+.passwordInputGroup input {
+  margin-right: 0.5rem;
+}
+
+.passwordInputGroup span {
+  margin: 0 0.5rem;
+  white-space: nowrap;
+}
+
+.passwordInputGroup button {
+  margin: 0;
+}
