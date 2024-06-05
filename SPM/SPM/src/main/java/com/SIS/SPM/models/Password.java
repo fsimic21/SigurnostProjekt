@@ -12,5 +12,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Password {
     private String password;
-    private String algorithm;
+    private String key;
 }

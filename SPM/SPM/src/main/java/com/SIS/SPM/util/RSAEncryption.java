@@ -1,5 +1,6 @@
 package com.SIS.SPM.util;
 
+import com.SIS.SPM.models.Algorithms;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Cipher;
@@ -13,9 +14,9 @@ public class RSAEncryption {
     public static byte[] encrypt(String plainText, String publicKeyString) throws Exception {
         byte[] publicKeyBytes = Base64.getDecoder().decode(publicKeyString);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyBytes);
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        KeyFactory keyFactory = KeyFactory.getInstance(Algorithms.RSA);
         PublicKey publicKey = keyFactory.generatePublic(keySpec);
-        Cipher cipher = Cipher.getInstance("RSA");
+        Cipher cipher = Cipher.getInstance(Algorithms.RSA);
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
         return cipher.doFinal(plainText.getBytes());
     }
