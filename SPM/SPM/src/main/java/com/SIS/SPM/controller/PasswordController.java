@@ -1,10 +1,9 @@
 package com.SIS.SPM.controller;
 
-import com.SIS.SPM.models.AES128;
-import com.SIS.SPM.models.RSA128;
-import com.SIS.SPM.models.SHA256;
+import com.SIS.SPM.models.Password;
 import com.SIS.SPM.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,32 +16,41 @@ public class PasswordController {
     private PasswordService passwordService;
 
     @GetMapping("/sha")
-    public List<SHA256> getAllPasswords() {
+    public List<Password> getAllPasswords() {
         return passwordService.getAllSHA();
     }
 
     @PostMapping("/sha")
-    public void addPassword(@RequestBody SHA256 SHA256) {
-        passwordService.addSHA(SHA256);
+    public void addPassword(@RequestBody Password password) {
+        passwordService.addSHA(password);
     }
 
     @GetMapping("/rsa")
-    public List<RSA128> getAllRSA() {
+    public List<Password> getAllRSA() {
         return passwordService.getAllRSA();
     }
 
     @PostMapping("/rsa")
-    public void addRSA(@RequestBody RSA128 rsa128) throws Exception {
-        passwordService.addRSA(rsa128);
+    public void addRSA(@RequestBody Password password) throws Exception {
+        passwordService.addRSA(password);
     }
 
     @GetMapping("/aes")
-    public List<AES128> getAllAES() {
+    public List<Password> getAllAES() {
         return passwordService.getAllAES();
     }
 
     @PostMapping("/aes")
-    public void addAES(@RequestBody AES128 aes128){
-        passwordService.addAES(aes128);
+    public void addAES(@RequestBody Password password){
+        passwordService.addAES(password);
+    }
+    @GetMapping("/blowfish")
+    public List<Password> getAllBlowfish() {
+        return passwordService.getAllBlowfish();
+    }
+
+    @PostMapping("/blowfish")
+    public void addBlowfish(@RequestBody Password password){
+        passwordService.addBlowfish(password);
     }
 }

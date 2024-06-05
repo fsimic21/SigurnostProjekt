@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class SHAEncryption {
 
-    public String SHA256(String password) throws  NoSuchAlgorithmException {
+    public String encrypt(String password) throws  NoSuchAlgorithmException {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(password.getBytes());
