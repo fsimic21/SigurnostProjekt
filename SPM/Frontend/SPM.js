@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(response => response.json())
       .then(data => {
         console.log(data + " ovo je odgovor servera");
+        fetchPasswords();
       })
       .catch(error => {
         console.log("Greška " + error);
@@ -114,4 +115,35 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     return window.btoa(binary);
   }
+
+  async function fetchPasswords() {
+    try {
+      const response = await fetch('http://localhost:8080/passwords');
+      const passwords = await response.json();
+      populateTable(passwords);
+    } catch (error) {
+      console.log("Error fetching passwords: " + error);
+    }
+  }
+
+  function populateTable(passwords) {
+    const tbody = document.querySelector("#passwordTable tbody");
+    tbody.innerHTML = '';
+
+    passwords.forEach(password => {
+      const row = document.createElement('tr');
+
+      const hashedPasswordCell = document.createElement('td');
+      hashedPasswordCell.textContent = password.hashedPassword;
+      row.appendChild(hashedPasswordCell);
+
+      const hashTypeCell = document.createElement('td');
+      hashTypeCell.textContent = password.hashType;
+      row.appendChild(hashTypeCell);
+
+      tbody.appendChild(row);
+    });
+  }
+
+  fetchPasswords();
 });
