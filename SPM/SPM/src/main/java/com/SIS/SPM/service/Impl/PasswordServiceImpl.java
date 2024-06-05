@@ -54,6 +54,7 @@ public class PasswordServiceImpl implements PasswordService {
     @Override
     public void addSHA(Password Password) {
         Firestore firestore = FirestoreClient.getFirestore();
+        Password.setHashType("SHA-256");
         String encryptedPassword = null;
         try {
             encryptedPassword = SHAEncryption.encrypt(Password.getPassword());
@@ -61,7 +62,6 @@ public class PasswordServiceImpl implements PasswordService {
             return;
         }
         Password.setPassword(encryptedPassword);
-
         ApiFuture<DocumentReference> future = firestore.collection(Algorithms.SHA).add(Password);
         try {
             DocumentReference documentReference = future.get();
@@ -91,6 +91,7 @@ public class PasswordServiceImpl implements PasswordService {
     @Override
     public void addRSA(Password Password) {
         Firestore firestore = FirestoreClient.getFirestore();
+        Password.setHashType("RSA");
         try {
             byte[] encryptedPassword = rsaEncryption.encrypt(Password.getPassword(), Password.getKey());
             String encryptedPasswordBase64 = Base64.getEncoder().encodeToString(encryptedPassword);
@@ -125,6 +126,7 @@ public class PasswordServiceImpl implements PasswordService {
     @Override
     public void addAES(Password Password) {
         Firestore firestore = FirestoreClient.getFirestore();
+        Password.setHashType("AES");
         try {
             byte[] encryptedPassword = aesEncryption.encrypt(Password.getPassword(), Password.getKey()).getBytes();
             String encryptedPasswordBase64 = Base64.getEncoder().encodeToString(encryptedPassword);
@@ -144,6 +146,7 @@ public class PasswordServiceImpl implements PasswordService {
         Firestore firestore = FirestoreClient.getFirestore();
         List<Password> Password = new ArrayList<>();
 
+
         try {
             firestore.collection(String.valueOf(Algorithms.BLOWFISH))
                     .get()
@@ -159,6 +162,8 @@ public class PasswordServiceImpl implements PasswordService {
     @Override
     public void addBlowfish(Password Password) {
         Firestore firestore = FirestoreClient.getFirestore();
+        Password.setHashType("Blowfish");
+
         try {
             byte[] encryptedPassword = blowfishEncryption.encrypt(Password.getPassword(), Password.getKey());
             String encryptedPasswordBase64 = Base64.getEncoder().encodeToString(encryptedPassword);

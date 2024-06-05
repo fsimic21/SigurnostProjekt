@@ -29,20 +29,20 @@ document.addEventListener("DOMContentLoaded", () => {
     switch (algorithm) {
       case "aes":
         key = generateRandomKey(32);
-        url = "/password/aes";
+        url = "http://localhost:8080/passwords/aes";
         break;
       case "blowfish":
         key = generateRandomKey(32);
-        url = "/password/blowfish";
+        url = "http://localhost:8080/passwords/blowfish";
         break;
       case "rsa":
         const rsaKey = await generateRSAKeyPair();
         key = rsaKey.publicKey;
-        url = "/password/rsa";
+        url = "http://localhost:8080/passwords/rsa";
         break;
       case "SHA-256":
         key = generateRandomKey(16);
-        url = "/password/sha";
+        url = "http://localhost:8080/passwords/sha";
         break;
     }
 
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     fetch(url, {
-      method: "post",
+      method: "POST",
       headers: {
         'Content-Type': 'application/json',
       },
