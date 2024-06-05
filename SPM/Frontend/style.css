@@ -88,11 +88,13 @@ select {
 #passwordTable td {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: left;
+  max-width: 300px;
+  word-wrap: break-word;
 }
 
 #passwordTable th {
   background-color: #f2f2f2;
-  text-align: left;
 }
 
 /* New Styles */
@@ -113,3 +115,4 @@ select {
 .passwordInputGroup button {
   margin: 0;
 }
+

@@ -118,7 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function fetchPasswords() {
     try {
-      const response = await fetch('http://localhost:8080/passwords');
+      const response = await fetch('http://localhost:8080/passwords/');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       const passwords = await response.json();
       populateTable(passwords);
     } catch (error) {
@@ -134,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const row = document.createElement('tr');
 
       const hashedPasswordCell = document.createElement('td');
-      hashedPasswordCell.textContent = password.hashedPassword;
+      hashedPasswordCell.textContent = password.password;
       row.appendChild(hashedPasswordCell);
 
       const hashTypeCell = document.createElement('td');
