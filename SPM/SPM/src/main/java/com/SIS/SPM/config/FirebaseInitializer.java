@@ -20,7 +20,7 @@ public class FirebaseInitializer {
     public void initialize() throws IOException {
         FileInputStream serviceAccount = null;
         try {
-            Path path = Paths.get("SPM/serviceAccountKey.json");
+            Path path = Paths.get("serviceAccountKey.json");
             System.out.println("Path to serviceAccountKey.json: " + path.toAbsolutePath().toString());
 
             if (!Files.exists(path)) {
