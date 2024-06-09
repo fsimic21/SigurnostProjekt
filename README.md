@@ -42,10 +42,11 @@ Blowfish primjerak:<br>
 }<br>
 
 Docker naredbe:
-(preduvjet je instalirati Docker)
+<br>(preduvjet je instalirati Docker)
 ```
 docker pull asalov21/spm-projekt
 ```
 ```
 docker run -p 8080:8080 asalov21/spm-projekt
 ```
+Otvoriti <http://localhost:8080/> za korištenje aplikacije
