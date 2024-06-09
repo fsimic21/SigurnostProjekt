@@ -41,3 +41,11 @@ Blowfish primjerak:<br>
     "key": "123456781234567812345678"<br>
 }<br>
 
+Docker naredbe:
+(preduvjet je instalirati Docker)
+```
+docker pull asalov21/spm-projekt
+```
+```
+docker run -p 8080:8080 asalov21/spm-projekt
+```
