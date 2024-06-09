@@ -1,0 +1,290 @@
+{
+  "id": "02c9e144-1c41-46cc-bb8e-c310ffca161a",
+  "version": "2.0",
+  "name": "SPM",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "d86eebb2-f511-4977-9bc6-e533ec9ec9d7",
+    "name": "Untitled",
+    "commands": []
+  }, {
+    "id": "4859e96e-10ac-42f7-8a4f-60193e55c9a5",
+    "name": "dodavanje vlastite lozinke",
+    "commands": [{
+      "id": "58969f8a-98d1-4904-9dea-3d65a73aaee9",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5da92452-541c-4b42-81d3-742d7a602c67",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "958x1039",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dbbe1beb-5290-4ecb-90fb-277a857a8715",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnInsertPassword",
+      "targets": [
+        ["id=btnInsertPassword", "id"],
+        ["css=#btnInsertPassword", "css:finder"],
+        ["xpath=//button[@id='btnInsertPassword']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Add +')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "db58b9f4-42f6-4748-8f80-3cb657bb4014",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "009131df-173a-4ed3-bea2-a7441c3612ff",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["name=password", "name"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "mojaLozinka123"
+    }, {
+      "id": "f69944c4-1b09-4639-92a9-240d45b739a5",
+      "comment": "",
+      "command": "click",
+      "target": "id=algorithm",
+      "targets": [
+        ["id=algorithm", "id"],
+        ["name=algorithm", "name"],
+        ["css=#algorithm", "css:finder"],
+        ["xpath=//select[@id='algorithm']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6f9ba81c-0bea-4b31-a6ea-28b0d0b9592a",
+      "comment": "",
+      "command": "select",
+      "target": "id=algorithm",
+      "targets": [],
+      "value": "label=Blowfish"
+    }, {
+      "id": "1cf43ef4-bfcb-46e9-8fac-12194f2b33ef",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(4)",
+      "targets": [
+        ["css=button:nth-child(4)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Hash it')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "bed5280b-17e0-450f-84fc-203dc4fc990f",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(69)",
+      "targets": [
+        ["css=tr:nth-child(69)", "css:finder"],
+        ["xpath=//table[@id='passwordTable']/tbody/tr[69]", "xpath:idRelative"],
+        ["xpath=//tr[69]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5297115f-0b5a-4111-8716-8eddff393549",
+      "comment": "",
+      "command": "click",
+      "target": "css=body",
+      "targets": [
+        ["css=body", "css:finder"],
+        ["xpath=//body", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5278d078-0274-48b1-9fc2-53fb609a3a21",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "85201ca6-73dc-4b74-b635-bf8ac9db65d9",
+    "name": "dodavanje nasumične lozinke",
+    "commands": [{
+      "id": "0440d89a-6c97-43c8-afe6-25a7d77a6e77",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "bf4b0d84-e9a5-4684-8c97-d3e4a74f4b3e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "958x1039",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a035cc1b-caa5-4578-8124-611b618dd0c4",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnInsertPassword",
+      "targets": [
+        ["id=btnInsertPassword", "id"],
+        ["css=#btnInsertPassword", "css:finder"],
+        ["xpath=//button[@id='btnInsertPassword']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Add +')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "24276123-abbf-4a53-8d1a-8801b0c780c8",
+      "comment": "",
+      "command": "chooseOkOnNextConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "61d9cc29-23ea-41aa-a1b7-846397da3603",
+      "comment": "",
+      "command": "click",
+      "target": "id=generatePasswordBtn",
+      "targets": [
+        ["id=generatePasswordBtn", "id"],
+        ["css=#generatePasswordBtn", "css:finder"],
+        ["xpath=//button[@id='generatePasswordBtn']", "xpath:attributes"],
+        ["xpath=//div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Generate Password')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9c7a6ab5-cdbf-4cb6-b1ad-c429adc84540",
+      "comment": "",
+      "command": "assertConfirmation",
+      "target": "Generated Password: goQR0)vl1`}U\nDo you want to use this password?",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a7bf898f-ab71-4e21-b490-b48c0cf71727",
+      "comment": "",
+      "command": "webdriverChooseOkOnVisibleConfirmation",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8f80d68b-da3b-42ad-8254-99b933dec169",
+      "comment": "",
+      "command": "click",
+      "target": "id=algorithm",
+      "targets": [
+        ["id=algorithm", "id"],
+        ["name=algorithm", "name"],
+        ["css=#algorithm", "css:finder"],
+        ["xpath=//select[@id='algorithm']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b9f3bceb-6006-4320-ba2f-414e32e28778",
+      "comment": "",
+      "command": "select",
+      "target": "id=algorithm",
+      "targets": [],
+      "value": "label=SHA-256"
+    }, {
+      "id": "ed09435e-3137-489b-804a-529e6c20f092",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(4)",
+      "targets": [
+        ["css=button:nth-child(4)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Hash it')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7713ee55-93f3-45f9-86a4-36d98cfb1096",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(52) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(52) > td:nth-child(1)", "css:finder"],
+        ["xpath=//table[@id='passwordTable']/tbody/tr[52]/td", "xpath:idRelative"],
+        ["xpath=//tr[52]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'3c7334cb1996c6d22018859544dc862656c95c110b497e5c4a2c8f2b5f321ae8')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "05b7d6a2-35fd-4942-b594-f1cbffe301dd",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(52) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(52) > td:nth-child(1)", "css:finder"],
+        ["xpath=//table[@id='passwordTable']/tbody/tr[52]/td", "xpath:idRelative"],
+        ["xpath=//tr[52]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'3c7334cb1996c6d22018859544dc862656c95c110b497e5c4a2c8f2b5f321ae8')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3deac21d-f2f7-4213-9497-872a407da904",
+      "comment": "",
+      "command": "doubleClick",
+      "target": "css=tr:nth-child(52) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(52) > td:nth-child(1)", "css:finder"],
+        ["xpath=//table[@id='passwordTable']/tbody/tr[52]/td", "xpath:idRelative"],
+        ["xpath=//tr[52]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'3c7334cb1996c6d22018859544dc862656c95c110b497e5c4a2c8f2b5f321ae8')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4ab55aa3-c41e-4351-aa4c-8b37befe025c",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(52) > td:nth-child(1)",
+      "targets": [
+        ["css=tr:nth-child(52) > td:nth-child(1)", "css:finder"],
+        ["xpath=//table[@id='passwordTable']/tbody/tr[52]/td", "xpath:idRelative"],
+        ["xpath=//tr[52]/td", "xpath:position"],
+        ["xpath=//td[contains(.,'3c7334cb1996c6d22018859544dc862656c95c110b497e5c4a2c8f2b5f321ae8')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c3f1be4-0b8a-4d92-931e-814541fc58e4",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "3fcf095a-98ef-43a0-a99d-31eef977fdf1",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["d86eebb2-f511-4977-9bc6-e533ec9ec9d7"]
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}
